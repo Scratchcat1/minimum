@@ -4,7 +4,7 @@ services:
   web:
     build: .
     restart: always
-    container_name: "m-rs"
+    container_name: "minimum"
     ports:
       - 9080:9080
     user: nobody
@@ -14,11 +14,11 @@ services:
     cap_drop:
       - ALL
     networks:
-      - m-rs
+      - minimum
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "--tries=1", "http://localhost:9080"]
       interval: 5m
       timeout: 3s
 
 networks:
-  m-rs:
+  minimum:
