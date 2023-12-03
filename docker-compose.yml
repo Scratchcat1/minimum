@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    restart: always
+    container_name: "m-rs"
+    ports:
+      - 9080:9080
+    user: nobody
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - m-rs
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "--tries=1", "http://localhost:9080"]
+      interval: 5m
+      timeout: 3s
+
+networks:
+  m-rs:

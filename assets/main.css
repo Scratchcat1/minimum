@@ -1,0 +1,113 @@
+:root {
+    font-family: "Open Sans", Arial;
+    --color: #444;
+    --background-color: #EEE;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color: #EEE;
+        --background-color: #444;
+    }
+}
+
+body {
+    color: var(--color);
+    background-color: var(--background-color);
+    margin: 40px auto;
+    max-width: 650px;
+    line-height: 1.6em;
+    padding: 0;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.gap-3 {
+    gap: 1em;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.profile-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .profile-picture {
+        max-height: 65px;
+    }
+
+    h1 {
+        margin: 0;
+    }
+}
+
+.post-preview-data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.85em;
+
+    span {
+        margin: 0 0.5rem;
+    }
+}
+
+.post-preview {
+    display: flex;
+    gap: 1em;
+    height: 7em;
+
+    color: var(--color);
+    text-decoration: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    >img {
+        object-fit: cover;
+        width: 25%;
+    }
+
+    >div {
+        width: 75%;
+    }
+
+    &:not(&:first-child) {
+        border-top: 1px solid var(--color);
+    }
+}
+
+.post-profile {
+    display: flex;
+    align-items: center;
+
+    & img {
+        height: 60px;
+    }
+
+    .details {
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}

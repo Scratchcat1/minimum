@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/main.css" />
+    <title>m-rs Home</title>
+</head>
+
+<body>
+    <h1>m-rs</h1>
+    Version: {{ version }}
+    <form method="get" action="/user-redirect">
+        <label>
+            Username
+            <input type="text" name="username" />
+        </label>
+        <button type="submit">
+            Go
+        </button>
+    </form>
+</body>
+
+</html>

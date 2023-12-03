@@ -1,0 +1,427 @@
+[
+  {
+    "data": {
+      "userResult": {
+        "id": "e119a26506e3",
+        "name": "Admiral Cloudberg",
+        "username": "admiralcloudberg",
+        "imageId": "2*pZPMtIONqtJYi2xHYD_Ivg.jpeg",
+        "homepagePostsConnection": {
+          "posts": [
+            {
+              "id": "950f44905f08",
+              "title": "Coming up Short: The crash of MarkAir flight 3087",
+              "postResponses": {
+                "count": 2
+              },
+              "createdAt": 1699090108097,
+              "firstPublishedAt": 1699119488611,
+              "latestPublishedAt": 1699210153171,
+              "updatedAt": 1699210153171,
+              "mediumUrl": "https://admiralcloudberg.medium.com/coming-up-short-the-crash-of-markair-flight-3087-950f44905f08",
+              "clapCount": 515,
+              "previewImage": {
+                "id": "0*5VeEfQ76VqFTZ-yH.png"
+              },
+              "readingTime": 27.049056603773586,
+              "uniqueSlug": "coming-up-short-the-crash-of-markair-flight-3087-950f44905f08",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                },
+                {
+                  "id": "alaska",
+                  "displayTitle": "Alaska",
+                  "normalizedTagSlug": "alaska"
+                },
+                {
+                  "id": "flying",
+                  "displayTitle": "Flying",
+                  "normalizedTagSlug": "flying"
+                }
+              ]
+            },
+            {
+              "id": "df0072def433",
+              "title": "Cogs in the Machine: The crash of Colgan Air flight 3407 and its legacy",
+              "postResponses": {
+                "count": 16
+              },
+              "createdAt": 1698497082165,
+              "firstPublishedAt": 1698522871738,
+              "latestPublishedAt": 1698699789380,
+              "updatedAt": 1698699789380,
+              "mediumUrl": "https://admiralcloudberg.medium.com/cogs-in-the-machine-the-crash-of-colgan-air-flight-3407-and-its-legacy-df0072def433",
+              "clapCount": 1370,
+              "previewImage": {
+                "id": "0*E0QldQP_hm0jwEjx.png"
+              },
+              "readingTime": 50.27452830188679,
+              "uniqueSlug": "cogs-in-the-machine-the-crash-of-colgan-air-flight-3407-and-its-legacy-df0072def433",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                },
+                {
+                  "id": "flying",
+                  "displayTitle": "Flying",
+                  "normalizedTagSlug": "flying"
+                },
+                {
+                  "id": "history",
+                  "displayTitle": "History",
+                  "normalizedTagSlug": "history"
+                },
+                {
+                  "id": "new-york",
+                  "displayTitle": "New York",
+                  "normalizedTagSlug": "new-york"
+                }
+              ]
+            },
+            {
+              "id": "3d38e7bedfe5",
+              "title": "Unscrewing Disaster: The 2022 Mutiny Bay seaplane crash",
+              "postResponses": {
+                "count": 3
+              },
+              "createdAt": 1697306472210,
+              "firstPublishedAt": 1697309076637,
+              "latestPublishedAt": 1697856584281,
+              "updatedAt": 1697856584281,
+              "mediumUrl": "https://admiralcloudberg.medium.com/unscrewing-disaster-the-2022-mutiny-bay-seaplane-crash-3d38e7bedfe5",
+              "clapCount": 875,
+              "previewImage": {
+                "id": "0*PbsEwdnd6zrQk_MC.png"
+              },
+              "readingTime": 21.143396226415096,
+              "uniqueSlug": "unscrewing-disaster-the-2022-mutiny-bay-seaplane-crash-3d38e7bedfe5",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                },
+                {
+                  "id": "seattle",
+                  "displayTitle": "Seattle",
+                  "normalizedTagSlug": "seattle"
+                },
+                {
+                  "id": "washington-state",
+                  "displayTitle": "Washington State",
+                  "normalizedTagSlug": "washington-state"
+                }
+              ]
+            },
+            {
+              "id": "76618bf5e995",
+              "title": "Countdown to Collision: The crash of LATAM Perú flight 2213",
+              "postResponses": {
+                "count": 5
+              },
+              "createdAt": 1696708035472,
+              "firstPublishedAt": 1696711577903,
+              "latestPublishedAt": 1696797414523,
+              "updatedAt": 1696797414523,
+              "mediumUrl": "https://admiralcloudberg.medium.com/countdown-to-collision-the-crash-of-latam-per%C3%BA-flight-2213-76618bf5e995",
+              "clapCount": 973,
+              "previewImage": {
+                "id": "0*jdplUqeFet0uNZTF.jpg"
+              },
+              "readingTime": 37.7254716981132,
+              "uniqueSlug": "countdown-to-collision-the-crash-of-latam-perú-flight-2213-76618bf5e995",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "peru",
+                  "displayTitle": "Peru",
+                  "normalizedTagSlug": "peru"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                },
+                {
+                  "id": "latin-america",
+                  "displayTitle": "Latin America",
+                  "normalizedTagSlug": "latin-america"
+                }
+              ]
+            },
+            {
+              "id": "a9f60fee710d",
+              "title": "One Hundred Seconds of Confusion: The crash of China Airlines flight 140",
+              "postResponses": {
+                "count": 11
+              },
+              "createdAt": 1696067498518,
+              "firstPublishedAt": 1696099730894,
+              "latestPublishedAt": 1696099730894,
+              "updatedAt": 1696099730894,
+              "mediumUrl": "https://admiralcloudberg.medium.com/one-hundred-seconds-of-confusion-the-crash-of-china-airlines-flight-140-a9f60fee710d",
+              "clapCount": 1345,
+              "previewImage": {
+                "id": "0*NEzONMMgtsCUvsoa.png"
+              },
+              "readingTime": 37.031132075471696,
+              "uniqueSlug": "one-hundred-seconds-of-confusion-the-crash-of-china-airlines-flight-140-a9f60fee710d",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                },
+                {
+                  "id": "japan",
+                  "displayTitle": "Japan",
+                  "normalizedTagSlug": "japan"
+                },
+                {
+                  "id": "taiwan",
+                  "displayTitle": "Taiwan",
+                  "normalizedTagSlug": "taiwan"
+                }
+              ]
+            },
+            {
+              "id": "b3fed300bdcf",
+              "title": "How Not to Fly a Plane: The 2017 Teterboro Learjet crash",
+              "postResponses": {
+                "count": 22
+              },
+              "createdAt": 1695444139756,
+              "firstPublishedAt": 1695488086059,
+              "latestPublishedAt": 1695964052665,
+              "updatedAt": 1695964052665,
+              "mediumUrl": "https://admiralcloudberg.medium.com/how-not-to-fly-a-plane-the-2017-teterboro-learjet-crash-b3fed300bdcf",
+              "clapCount": 1399,
+              "previewImage": {
+                "id": "0*1jv-3QcthPME6vhW.jpg"
+              },
+              "readingTime": 33.009433962264154,
+              "uniqueSlug": "how-not-to-fly-a-plane-the-2017-teterboro-learjet-crash-b3fed300bdcf",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "new-jersey",
+                  "displayTitle": "New Jersey",
+                  "normalizedTagSlug": "new-jersey"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                }
+              ]
+            },
+            {
+              "id": "1a8a8daa566b",
+              "title": "The Dead Man’s Gambit: The crash of Ethiopian Airlines flight 961",
+              "postResponses": {
+                "count": 19
+              },
+              "createdAt": 1694241072524,
+              "firstPublishedAt": 1694280969120,
+              "latestPublishedAt": 1698990331199,
+              "updatedAt": 1698990331199,
+              "mediumUrl": "https://admiralcloudberg.medium.com/the-dead-mans-gambit-the-crash-of-ethiopian-airlines-flight-961-1a8a8daa566b",
+              "clapCount": 2573,
+              "previewImage": {
+                "id": "0*161y31DfT29q1-IA.jpg"
+              },
+              "readingTime": 34.23490566037736,
+              "uniqueSlug": "the-dead-mans-gambit-the-crash-of-ethiopian-airlines-flight-961-1a8a8daa566b",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "history",
+                  "displayTitle": "History",
+                  "normalizedTagSlug": "history"
+                },
+                {
+                  "id": "africa",
+                  "displayTitle": "Africa",
+                  "normalizedTagSlug": "africa"
+                },
+                {
+                  "id": "ethiopia",
+                  "displayTitle": "Ethiopia",
+                  "normalizedTagSlug": "ethiopia"
+                }
+              ]
+            },
+            {
+              "id": "67de2a279674",
+              "title": "Tempest over Texas: The crash of Braniff International Airways flight 352",
+              "postResponses": {
+                "count": 6
+              },
+              "createdAt": 1693637086247,
+              "firstPublishedAt": 1693671816340,
+              "latestPublishedAt": 1693728172565,
+              "updatedAt": 1693728172565,
+              "mediumUrl": "https://admiralcloudberg.medium.com/tempest-over-texas-the-crash-of-braniff-international-airways-flight-352-67de2a279674",
+              "clapCount": 1150,
+              "previewImage": {
+                "id": "0*vh3ldmihGVRveOZo.png"
+              },
+              "readingTime": 28.860377358490567,
+              "uniqueSlug": "tempest-over-texas-the-crash-of-braniff-international-airways-flight-352-67de2a279674",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                },
+                {
+                  "id": "history",
+                  "displayTitle": "History",
+                  "normalizedTagSlug": "history"
+                },
+                {
+                  "id": "texas",
+                  "displayTitle": "Texas",
+                  "normalizedTagSlug": "texas"
+                },
+                {
+                  "id": "weather",
+                  "displayTitle": "Weather",
+                  "normalizedTagSlug": "weather"
+                }
+              ]
+            },
+            {
+              "id": "c5cb0202303a",
+              "title": "Cruelty of Chance: The Cerritos mid-air collision and the crash of Aeroméxico flight 498",
+              "postResponses": {
+                "count": 16
+              },
+              "createdAt": 1693066619418,
+              "firstPublishedAt": 1693069969060,
+              "latestPublishedAt": 1693365980983,
+              "updatedAt": 1693365980983,
+              "mediumUrl": "https://admiralcloudberg.medium.com/cruelty-of-chance-the-cerritos-mid-air-collision-and-the-crash-of-aerom%C3%A9xico-flight-498-c5cb0202303a",
+              "clapCount": 1574,
+              "previewImage": {
+                "id": "0*xniO1pR0jfpVwkNW"
+              },
+              "readingTime": 32.06132075471698,
+              "uniqueSlug": "cruelty-of-chance-the-cerritos-mid-air-collision-and-the-crash-of-aeroméxico-flight-498-c5cb0202303a",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                },
+                {
+                  "id": "california",
+                  "displayTitle": "California",
+                  "normalizedTagSlug": "california"
+                },
+                {
+                  "id": "los-angeles",
+                  "displayTitle": "Los Angeles",
+                  "normalizedTagSlug": "los-angeles"
+                }
+              ]
+            },
+            {
+              "id": "2c957bbec2d",
+              "title": "Antonov’s Curse: The crash of Sepahan Airlines flight 5915 and the story of the An-140",
+              "postResponses": {
+                "count": 4
+              },
+              "createdAt": 1692431084206,
+              "firstPublishedAt": 1692468118205,
+              "latestPublishedAt": 1692533941410,
+              "updatedAt": 1692533941410,
+              "mediumUrl": "https://admiralcloudberg.medium.com/antonovs-curse-the-crash-of-sepahan-airlines-flight-5915-and-the-story-of-the-an-140-2c957bbec2d",
+              "clapCount": 915,
+              "previewImage": {
+                "id": "0*c7Q_1LFXmGQtHKoy"
+              },
+              "readingTime": 28.714150943396227,
+              "uniqueSlug": "antonovs-curse-the-crash-of-sepahan-airlines-flight-5915-and-the-story-of-the-an-140-2c957bbec2d",
+              "tags": [
+                {
+                  "id": "aviation",
+                  "displayTitle": "Aviation",
+                  "normalizedTagSlug": "aviation"
+                },
+                {
+                  "id": "technology",
+                  "displayTitle": "Technology",
+                  "normalizedTagSlug": "technology"
+                },
+                {
+                  "id": "ukraine",
+                  "displayTitle": "Ukraine",
+                  "normalizedTagSlug": "ukraine"
+                },
+                {
+                  "id": "iran",
+                  "displayTitle": "Iran",
+                  "normalizedTagSlug": "iran"
+                }
+              ]
+            }
+          ],
+          "pagingInfo": {
+            "next": {
+              "from": "L1692468118205",
+              "limit": 10
+            }
+          }
+        }
+      }
+    }
+  }
+]

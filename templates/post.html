@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/main.css" />
+    <title>{{ title }} - {{ creator.name }}</title>
+</head>
+
+<body>
+    <h1>{{ title }}</h1>
+    <div class="center">
+        <a href="{{ medium_url }}">
+            Open with Medium
+        </a>
+    </div>
+    <div class="post-profile gap-3">
+        <img src="https://miro.medium.com/v2/resize:fit:64/{{ creator.image_id}}"
+            alt="{{creator.name}} profile picture" />
+        <div class="details">
+            <a href="/user/{{creator.username}}/posts">
+                <b>{{creator.name}}</b>
+            </a>
+            <span>Followers: {{ creator.social_stats.follower_count}}</span>
+            <span>Clap count: {{clap_count}}</span>
+            <span>Licence: {{license}}</span>
+            <span>
+                Published:
+                {% if let Some(date) = self.first_published_at_date() %}
+                {{date}}
+                {% else %}
+                Unknown
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    <div>
+        {% for paragraph in paragraphs %}
+        {% if paragraph.p_type == "IMG" && paragraph.metadata.is_some() %}
+        {% if let Some(metadata) = paragraph.metadata %}
+        <figure>
+            {% if metadata.is_video() %}
+            <video controls src="https://miro.medium.com/v2/format:mp4/{{ metadata.id }}"></video>
+            {% else %}
+            <img loading="lazy" src="https://miro.medium.com/v2/format:jpeg/{{ metadata.id }}"
+                alt="{{paragraph.text}}" />
+            {% endif %}
+            <figcaption>{{paragraph.text}}</figcaption>
+        </figure>
+        {% endif %}
+        {% endif %}
+        {% if paragraph.metadata.is_none() %}
+        <p>{{paragraph.text}}</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+</body>
+
+</html>
