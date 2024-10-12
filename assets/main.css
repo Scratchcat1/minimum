@@ -1,5 +1,5 @@
 :root {
-    font-family: "Open Sans", Arial;
+    font-family: "Open Sans", Arial, sans-serif;
     --color: #444;
     --background-color: #EEE;
 }
@@ -9,6 +9,17 @@
         --color: #EEE;
         --background-color: #444;
     }
+
+    a {
+        color: #1E90FF; /* Light blue */
+        text-decoration: none; /* Remove underline if desired */
+    }
+
+    a:hover {
+        color: #00BFFF; /* Lighter blue for hover state */
+        text-decoration: underline; /* Underline on hover */
+    }
+
 }
 
 body {
@@ -46,6 +57,7 @@ video {
     display: flex;
     gap: 1rem;
     align-items: center;
+    color: var(--color);
 
     .profile-picture {
         max-height: 65px;
@@ -56,22 +68,10 @@ video {
     }
 }
 
-.post-preview-data {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 0.85em;
-
-    span {
-        margin: 0 0.5rem;
-    }
-}
-
 .post-preview {
     display: flex;
     gap: 1em;
-    height: 7em;
+    height: 10em;
 
     color: var(--color);
     text-decoration: none;
@@ -83,12 +83,31 @@ video {
         width: 25%;
     }
 
-    >div {
+    .post-preview-info {
         width: 75%;
+        display: flex;
+        flex-direction: column;
+
+        .subtitle {
+            text-overflow: ellipsis;
+            flex-grow: 1;
+        }
+
+        .post-preview-data {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.85em;
+        }
     }
 
     &:not(&:first-child) {
         border-top: 1px solid var(--color);
+    }
+
+    &:hover {
+        color: var(--color);
     }
 }
 
@@ -110,4 +129,9 @@ video {
 .center {
     display: flex;
     justify-content: center;
+}
+
+.next-prev {
+    display: flex;
+    justify-content: space-between;
 }

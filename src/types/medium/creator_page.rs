@@ -51,6 +51,10 @@ pub struct PostPreview {
     pub preview_image: PreviewImage,
     #[serde(rename = "readingTime")]
     pub reading_time: f32,
+    #[serde(rename = "uniqueSlug")]
+    pub unique_slug: String,
+    #[serde(rename = "extendedPreviewContent")]
+    pub extended_preview_content: ExtendedPreviewContent,
 }
 
 impl PostPreview {
@@ -66,6 +70,11 @@ impl PostPreview {
 #[derive(Deserialize, Debug)]
 pub struct PreviewImage {
     pub id: String,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct ExtendedPreviewContent {
+    pub subtitle: String,
 }
 
 #[derive(Deserialize, Debug)]

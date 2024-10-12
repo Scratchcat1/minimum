@@ -168,6 +168,9 @@ query CreatorsQuery(
                     previewImage {
                         id
                     }
+                    extendedPreviewContent {
+                        subtitle
+                    }
                     readingTime
                     uniqueSlug
                     tags {
@@ -196,7 +199,6 @@ query CreatorsQuery(
     }
 
     pub async fn get_post(&self, post_id: &str) -> Result<Post, String> {
-        println!("{:?}", format!("[{{\"operationName\":\"PostPageQuery\",\"variables\":{{\"postId\":\"{}\",\"postMeteringOptions\":{{}}}},\"query\":\"{}\"}}]", post_id, Self::get_post_graphql()));
         let request = self.client.post("https://medium.com/_/graphql")
             .header("Content-Type", "application/json")
             .body(format!("[{{\"operationName\":\"PostPageQuery\",\"variables\":{{\"postId\":\"{}\",\"postMeteringOptions\":{{}}}},\"query\":\"{}\"}}]", post_id, Self::get_post_graphql()))
@@ -219,7 +221,7 @@ query CreatorsQuery(
     ) -> Result<CreatorPage, String> {
         let request = self.client.post("https://medium.com/_/graphql")
             .header("Content-Type", "application/json")
-            .body(format!("[{{\"operationName\":\"CreatorsQuery\",\"variables\":{{\"creator_pagePostsFrom\":\"{}\",\"username\":\"{}\",\"creator_pagePostsLimit\":25}},\"query\":\"{}\"}}]", creator_page_posts_from.unwrap_or(""), username, Self::get_post_previews_graphql()))
+            .body(format!("[{{\"operationName\":\"CreatorsQuery\",\"variables\":{{\"homepagePostsFrom\":\"{}\",\"username\":\"{}\",\"creator_pagePostsLimit\":25}},\"query\":\"{}\"}}]", creator_page_posts_from.unwrap_or(""), username, Self::get_post_previews_graphql()))
             .build().unwrap();
         let res = self.client.execute(request).await.unwrap();
         println!("Status: {}", res.status());

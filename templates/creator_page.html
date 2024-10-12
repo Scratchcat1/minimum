@@ -8,18 +8,21 @@
 </head>
 
 <body>
-    <div class="d-flex gap-3 profile-header">
+    <a class="d-flex gap-3 profile-header" href="/user/{{username}}/posts">
         <img class="profile-picture" src="https://miro.medium.com/v2/resize:fit:240/{{ image_id}}"
             alt="{{name}} profile picture" />
         <h1>{{ name }}</h1>
-    </div>
+    </a>
     <div class="mt-3">
         {% for post in post_previews.posts %}
-        <a href="/posts/{{post.id}}" class="post-preview">
-            <img loading="lazy" src="https://miro.medium.com/v2/resize:fit:120/{{ post.preview_image.id }}"
+        <a href="/posts/by-slug/{{post.unique_slug}}" class="post-preview">
+            <img loading="lazy" src="https://miro.medium.com/v2/resize:fit:240/{{ post.preview_image.id }}"
                 alt="Preview Image" />
-            <div>
-                <strong>{{post.title}}</strong><br />
+            <div class="post-preview-info">
+                <strong>{{post.title}}</strong>
+                <div class="subtitle">
+                    {{post.extended_preview_content.subtitle}}
+                </div>
                 <div class="post-preview-data">
                     <span>
                         <strong>Time</strong>
@@ -43,10 +46,14 @@
         {% endfor %}
     </div>
     <hr />
-    <div>
+    <div class="next-prev">
         {% if let Some(previous) = self.post_previews.paging_info.previous %}
         <a href="?from={{previous.from}}">
             Prev
+        </a>
+        {% else %}
+        <a href="?">
+            Home
         </a>
         {% endif %}
         {% if let Some(next) = self.post_previews.paging_info.next %}
