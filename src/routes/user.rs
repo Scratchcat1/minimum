@@ -10,7 +10,6 @@ use axum::{
 use reqwest::StatusCode;
 use std::collections::HashMap;
 use std::sync::Arc;
-use tokio::time::Instant;
 
 pub async fn get_user_redirect(Query(params): Query<HashMap<String, String>>) -> Response<BoxBody> {
     let username = match params.get("username") {
@@ -29,7 +28,6 @@ pub async fn get_posts(
     Query(params): Query<HashMap<String, String>>,
     State(state): State<Arc<AppState>>,
 ) -> Response<BoxBody> {
-    let request_start = Instant::now();
     let posts_from = params.get("from");
     println!(
         "Request: get_posts(username={}, posts_from={:?})",
@@ -39,7 +37,6 @@ pub async fn get_posts(
         .medium
         .get_post_previews(&username, posts_from.map(|x| x.as_str()))
         .await;
-    println!("Request in {}ms", request_start.elapsed().as_millis());
     match post_previews_result {
         Ok(post_previews) => {
             let html = CreatorPageTemplate::from(&post_previews);

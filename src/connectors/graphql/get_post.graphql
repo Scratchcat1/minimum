@@ -1,0 +1,116 @@
+query PostPageQuery($postId: ID!, $postMeteringOptions: PostMeteringOptions) {
+    postResult(id: $postId) {
+        ... on Post {
+            id
+            creator {
+                id
+                imageId
+                name
+                socialStats {
+                    followerCount
+                }
+                username
+                hasSubdomain
+                customDomainState {
+                    live {
+                        domain
+                    }
+                }
+                bio
+            }
+            content(postMeteringOptions: $postMeteringOptions) {
+                bodyModel {
+                    paragraphs {
+                        id
+                        name
+                        type
+                        href
+                        layout
+                        metadata {
+                            id
+                            originalHeight
+                            originalWidth
+                            focusPercentX
+                            focusPercentY
+                            alt
+                        }
+                        text
+                        hasDropCap
+                        dropCapImage {
+                            id
+                            originalHeight
+                            originalWidth
+                        }
+                        markups {
+                            type
+                            start
+                            end
+                            href
+                            anchorType
+                            userId
+                            linkMetadata {
+                                httpStatus
+                            }
+                        }
+                        codeBlockMetadata {
+                            mode
+                            lang
+                        }
+                        iframe {
+                            mediaResource {
+                                id
+                                iframeSrc
+                                iframeHeight
+                                iframeWidth
+                                title
+                            }
+                        }
+                        mixtapeMetadata {
+                            href
+                            mediaResource {
+                                mediumCatalog {
+                                    id
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            inResponseToEntityType
+            isLocked
+            isMarkedPaywallOnly
+            mediumUrl
+            topics {
+                slug
+            }
+            postResponses {
+                count
+            }
+            createdAt
+            firstPublishedAt
+            latestPublishedAt
+            clapCount
+            title
+            uniqueSlug
+            readingTime
+            previewContent {
+                subtitle
+            }
+            previewImage {
+                id
+                alt
+                focusPercentX
+                focusPercentY
+                originalHeight
+                originalWidth
+            }
+            updatedAt
+            license
+            tags {
+                id
+                displayTitle
+                normalizedTagSlug
+            }
+        }
+    }
+}

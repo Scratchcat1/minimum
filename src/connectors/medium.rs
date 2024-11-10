@@ -1,8 +1,9 @@
-use reqwest::Client;
+use reqwest::{Client, Response};
 
 use crate::types::medium::creator_page::{CreatorPage, UserResult};
 use crate::types::medium::post::Post;
 use crate::types::medium::post::PostResult;
+use tokio::time::Instant;
 
 pub struct BasicMediumConnector {
     client: Client,
@@ -16,199 +17,20 @@ impl BasicMediumConnector {
     }
 
     fn get_post_graphql() -> String {
-        "query PostPageQuery($postId: ID!, $postMeteringOptions: PostMeteringOptions) {
-    postResult(id: $postId) {
-        ... on Post {
-            id
-            creator {
-                id
-                imageId
-                name
-                socialStats {
-                    followerCount
-                }
-                username
-                hasSubdomain
-                customDomainState {
-                    live {
-                        domain
-                    }
-                }
-                bio
-            }
-            content(postMeteringOptions: $postMeteringOptions) {
-                bodyModel {
-                    paragraphs {
-                        id
-                        name
-                        type
-                        href
-                        layout
-                        metadata {
-                            id
-                            originalHeight
-                            originalWidth
-                            focusPercentX
-                            focusPercentY
-                            alt
-                        }
-                        text
-                        hasDropCap
-                        dropCapImage {
-                            id
-                            originalHeight
-                            originalWidth
-                        }
-                        markups {
-                            type
-                            start
-                            end
-                            href
-                            anchorType
-                            userId
-                            linkMetadata {
-                                httpStatus
-                            }
-                        }
-                        codeBlockMetadata {
-                            mode
-                            lang
-                        }
-                        iframe {
-                            mediaResource {
-                                id
-                                iframeSrc
-                                iframeHeight
-                                iframeWidth
-                                title
-                            }
-                        }
-                        mixtapeMetadata {
-                            href
-                            mediaResource {
-                                mediumCatalog {
-                                    id
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            inResponseToEntityType
-            isLocked
-            isMarkedPaywallOnly
-            mediumUrl
-            topics {
-                slug
-            }
-            postResponses {
-                count
-            }
-            createdAt
-            firstPublishedAt
-            latestPublishedAt
-            clapCount
-            title
-            uniqueSlug
-            readingTime
-            previewContent {
-                subtitle
-            }
-            previewImage {
-                id
-                alt
-                focusPercentX
-                focusPercentY
-                originalHeight
-                originalWidth
-            }
-            updatedAt
-            license
-            tags {
-                id
-                displayTitle
-                normalizedTagSlug
-            }
-        }
-    }
-}
-"
-        .to_string()
-        .replace("\n", " ")
+        include_str!("graphql/get_post.graphql").replace("\n", " ")
     }
     fn get_post_previews_graphql() -> String {
-        return "
-query CreatorsQuery(
-    $id: ID
-    $username: ID
-    $homepagePostsLimit: PaginationLimit
-    $homepagePostsFrom: String = null
-) {
-    userResult(id: $id, username: $username) {
-        ... on User {
-            id
-            name
-            username
-            imageId
-            homepagePostsConnection(
-                paging: { limit: $homepagePostsLimit, from: $homepagePostsFrom }
-            ) {
-                posts {
-                    id
-                    title
-                    postResponses {
-                        count
-                    }
-                    createdAt
-                    firstPublishedAt
-                    latestPublishedAt
-                    updatedAt
-                    mediumUrl
-                    clapCount
-                    previewImage {
-                        id
-                    }
-                    extendedPreviewContent {
-                        subtitle
-                    }
-                    readingTime
-                    uniqueSlug
-                    tags {
-                        id
-                        displayTitle
-                        normalizedTagSlug
-                    }
-                }
-                pagingInfo {
-                    previous {
-                        from
-                        limit
-                    }
-                    next {
-                        from
-                        limit
-                    }
-                }
-            }
-        }
-    }
-}
-"
-        .to_string()
-        .replace("\n", " ");
+        return include_str!("graphql/get_post_previews.graphql").replace("\n", " ");
     }
 
     pub async fn get_post(&self, post_id: &str) -> Result<Post, String> {
-        let request = self.client.post("https://medium.com/_/graphql")
-            .header("Content-Type", "application/json")
-            .body(format!("[{{\"operationName\":\"PostPageQuery\",\"variables\":{{\"postId\":\"{}\",\"postMeteringOptions\":{{}}}},\"query\":\"{}\"}}]", post_id, Self::get_post_graphql()))
-            .build().unwrap();
-        let res = self.client.execute(request).await.unwrap();
-        println!("Status: {}", res.status());
-        if !res.status().is_success() {
-            panic!("Request failed with HTTP {}", res.status());
-        }
-        // println!("body: {}" , res.text().await.unwrap());
+        let request_start = Instant::now();
+
+        let res = self.graph_ql(format!("[{{\"operationName\":\"PostPageQuery\",\"variables\":{{\"postId\":\"{}\",\"postMeteringOptions\":{{}}}},\"query\":\"{}\"}}]", post_id, Self::get_post_graphql())).await;
+
+        let request_description = format!("get post {}", post_id);
+        BasicMediumConnector::log_request_outcome(&request_description, &res, &request_start);
+
         let mut result: Vec<PostResult<Post>> = res.json().await.unwrap();
         let post = result.remove(0).data.post_result;
         return Ok(post);
@@ -219,20 +41,49 @@ query CreatorsQuery(
         username: &str,
         creator_page_posts_from: Option<&str>,
     ) -> Result<CreatorPage, String> {
-        let request = self.client.post("https://medium.com/_/graphql")
-            .header("Content-Type", "application/json")
-            .body(format!("[{{\"operationName\":\"CreatorsQuery\",\"variables\":{{\"homepagePostsFrom\":\"{}\",\"username\":\"{}\",\"creator_pagePostsLimit\":25}},\"query\":\"{}\"}}]", creator_page_posts_from.unwrap_or(""), username, Self::get_post_previews_graphql()))
-            .build().unwrap();
-        let res = self.client.execute(request).await.unwrap();
-        println!("Status: {}", res.status());
-        if !res.status().is_success() {
-            eprintln!("Request failed with HTTP {}", res.status());
-            eprintln!("Body: {}", res.text().await.unwrap());
-            panic!("!")
-        }
-        // println!("body: {}" , res.text().await.unwrap());
+        let request_start = Instant::now();
+
+        let res = self.graph_ql(format!("[{{\"operationName\":\"CreatorsQuery\",\"variables\":{{\"homepagePostsFrom\":\"{}\",\"username\":\"{}\",\"creator_pagePostsLimit\":25}},\"query\":\"{}\"}}]", creator_page_posts_from.unwrap_or(""), username, Self::get_post_previews_graphql())).await;
+
+        let request_description = format!("get post previews {}", username);
+        BasicMediumConnector::log_request_outcome(&request_description, &res, &request_start);
+
         let mut result: Vec<UserResult<CreatorPage>> = res.json().await.unwrap();
         let post = result.remove(0).data.user_result;
         return Ok(post);
+    }
+
+    fn log_request_outcome(
+        request_description: &str,
+        response: &Response,
+        request_start: &Instant,
+    ) {
+        let duration = request_start.elapsed().as_millis();
+        if response.status().is_success() {
+            println!(
+                "{}: ({}, {}ms)",
+                request_description,
+                response.status(),
+                duration
+            );
+        } else {
+            eprintln!(
+                "{}: ({}, {}ms)",
+                request_description,
+                response.status(),
+                duration
+            );
+        }
+    }
+
+    async fn graph_ql(&self, query: String) -> Response {
+        let request = self
+            .client
+            .post("https://medium.com/_/graphql")
+            .header("Content-Type", "application/json")
+            .body(query)
+            .build()
+            .unwrap();
+        return self.client.execute(request).await.unwrap();
     }
 }

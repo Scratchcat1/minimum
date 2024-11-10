@@ -1,0 +1,55 @@
+query CreatorsQuery(
+    $id: ID
+    $username: ID
+    $homepagePostsLimit: PaginationLimit
+    $homepagePostsFrom: String = null
+) {
+    userResult(id: $id, username: $username) {
+        ... on User {
+            id
+            name
+            username
+            imageId
+            homepagePostsConnection(
+                paging: { limit: $homepagePostsLimit, from: $homepagePostsFrom }
+            ) {
+                posts {
+                    id
+                    title
+                    postResponses {
+                        count
+                    }
+                    createdAt
+                    firstPublishedAt
+                    latestPublishedAt
+                    updatedAt
+                    mediumUrl
+                    clapCount
+                    previewImage {
+                        id
+                    }
+                    extendedPreviewContent {
+                        subtitle
+                    }
+                    readingTime
+                    uniqueSlug
+                    tags {
+                        id
+                        displayTitle
+                        normalizedTagSlug
+                    }
+                }
+                pagingInfo {
+                    previous {
+                        from
+                        limit
+                    }
+                    next {
+                        from
+                        limit
+                    }
+                }
+            }
+        }
+    }
+}

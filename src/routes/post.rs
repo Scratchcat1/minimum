@@ -9,13 +9,10 @@ use axum::{
 use regex::Regex;
 use reqwest::StatusCode;
 use std::sync::Arc;
-use tokio::time::Instant;
 
 pub async fn get_post(post_id: &str, state: Arc<AppState>) -> Response<BoxBody> {
     println!("Request: get_post(post_id={})", post_id);
-    let request_start = Instant::now();
     let post_result = state.medium.get_post(&post_id).await;
-    println!("Request in {}ms", request_start.elapsed().as_millis());
     match post_result {
         Ok(post) => {
             let html = PostTemplate::from(&post);
