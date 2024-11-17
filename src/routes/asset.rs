@@ -2,9 +2,9 @@ use axum::extract::Path;
 use axum::{
     body::BoxBody,
     http::header,
+    http::StatusCode,
     response::{IntoResponse, Response},
 };
-use reqwest::StatusCode;
 
 pub async fn get_asset(Path(asset_name): Path<String>) -> Response<BoxBody> {
     match asset_name.as_str() {

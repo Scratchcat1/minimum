@@ -1,9 +1,9 @@
 ####################################################################################################
 ## Builder
 ####################################################################################################
-FROM rust:alpine AS builder
+FROM rust AS builder
 
-RUN apk add --no-cache musl-dev libressl-dev pkgconfig
+#RUN apk add --no-cache libc-dev openssl-dev build-base musl-dev pkgconfig perl openssl
 
 WORKDIR /minimum
 
@@ -14,11 +14,11 @@ RUN cargo build --release
 ####################################################################################################
 ## Final image
 ####################################################################################################
-FROM alpine:latest
+FROM debian:stable-slim
 
-# Import ca-certificates from builder
-COPY --from=builder /usr/share/ca-certificates /usr/share/ca-certificates
-COPY --from=builder /etc/ssl/certs /etc/ssl/certs
+RUN apt-get update && apt-get install -y \
+  openssl ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
 
 # Copy our build
 COPY --from=builder /minimum/target/release/m_rs /usr/local/bin/m_rs

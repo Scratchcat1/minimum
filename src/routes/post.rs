@@ -4,10 +4,10 @@ use crate::templates::post::PostTemplate;
 use axum::extract::{Path, State};
 use axum::{
     body::BoxBody,
+    http::StatusCode,
     response::{IntoResponse, Response},
 };
 use regex::Regex;
-use reqwest::StatusCode;
 use std::sync::Arc;
 
 pub async fn get_post(post_id: &str, state: Arc<AppState>) -> Response<BoxBody> {

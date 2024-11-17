@@ -5,9 +5,9 @@ use axum::extract::{Path, Query, State};
 use axum::{
     body::BoxBody,
     http::header,
+    http::StatusCode,
     response::{IntoResponse, Response},
 };
-use reqwest::StatusCode;
 use std::collections::HashMap;
 use std::sync::Arc;
 

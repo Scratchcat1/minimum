@@ -7,9 +7,9 @@ use crate::templates::TimedRender;
 use askama::Template;
 use axum::{
     http::header,
+    http::StatusCode,
     response::{IntoResponse, Response},
 };
-use reqwest::StatusCode;
 
 pub struct AppState {
     pub medium: BasicMediumConnector,
