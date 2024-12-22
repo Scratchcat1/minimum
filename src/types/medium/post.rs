@@ -1,8 +1,8 @@
 use crate::types::medium::creator;
 use http::Uri;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Post {
     pub id: String,
     pub creator: creator::Creator,
@@ -25,18 +25,18 @@ pub struct Post {
     pub content: Content,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Content {
     #[serde(rename = "bodyModel")]
     pub body_model: BodyModel,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct BodyModel {
     pub paragraphs: Vec<Paragraph>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Paragraph {
     #[serde(rename = "type")]
     pub p_type: String,
@@ -45,7 +45,7 @@ pub struct Paragraph {
     pub markups: Option<Vec<Markup>>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Metadata {
     pub id: String,
     #[serde(rename = "originalHeight")]
@@ -57,11 +57,11 @@ pub struct Metadata {
 
 impl Metadata {
     pub fn is_video(&self) -> bool {
-        return self.id.ends_with(".gif")
+        return self.id.ends_with(".gif");
     }
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Markup {
     #[serde(rename = "type")]
     pub markup_type: String,
@@ -72,13 +72,13 @@ pub struct Markup {
     pub anchor_type: Option<String>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct PostResultInner<T> {
     #[serde(rename = "postResult")]
     pub post_result: T,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct PostResult<T> {
     pub data: PostResultInner<T>,
 }

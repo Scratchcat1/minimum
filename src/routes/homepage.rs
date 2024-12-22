@@ -1,4 +1,4 @@
-use super::html_ok;
+use super::util::html_ok;
 use crate::templates::homepage::HomepageTemplate;
 use axum::{body::BoxBody, response::Response};
 

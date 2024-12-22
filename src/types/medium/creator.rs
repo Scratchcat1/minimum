@@ -1,6 +1,6 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct Creator {
     pub id: String,
     pub name: String,
@@ -12,7 +12,7 @@ pub struct Creator {
     pub bio: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct SocialStats {
     #[serde(rename = "followerCount")]
     pub follower_count: u32,

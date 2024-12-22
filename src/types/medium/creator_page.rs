@@ -1,19 +1,19 @@
 use axum::http::Uri;
 use chrono::{DateTime, Utc};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct UserResult<T> {
     pub data: UserResultInner<T>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct UserResultInner<T> {
     #[serde(rename = "userResult")]
     pub user_result: T,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct CreatorPage {
     pub id: String,
     pub name: String,
@@ -24,14 +24,14 @@ pub struct CreatorPage {
     pub post_previews: CreatorPagePostsConnection,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct CreatorPagePostsConnection {
     pub posts: Vec<PostPreview>,
     #[serde(rename = "pagingInfo")]
     pub paging_info: PagingInfo,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct PostPreview {
     pub id: String,
     pub title: String,
@@ -67,23 +67,23 @@ impl PostPreview {
     }
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct PreviewImage {
     pub id: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct ExtendedPreviewContent {
     pub subtitle: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct PagingInfo {
     pub previous: Option<FromPagingInfo>,
     pub next: Option<FromPagingInfo>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct FromPagingInfo {
     pub from: String,
     pub limit: u32,

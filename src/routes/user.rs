@@ -1,5 +1,4 @@
-use super::AppState;
-use super::{html_ok, internal_server_error};
+use crate::routes::util::{html_ok, internal_server_error};
 use crate::templates::creator_page::CreatorPageTemplate;
 use axum::extract::{Path, Query, State};
 use axum::{
@@ -10,6 +9,8 @@ use axum::{
 };
 use std::collections::HashMap;
 use std::sync::Arc;
+
+use super::state::AppState;
 
 pub async fn get_user_redirect(Query(params): Query<HashMap<String, String>>) -> Response<BoxBody> {
     let username = match params.get("username") {
@@ -35,8 +36,7 @@ pub async fn get_posts(
     );
     let post_previews_result = state
         .medium
-        .get_post_previews(&username, posts_from.map(|x| x.as_str()))
-        .await;
+        .get_post_previews(&username, posts_from.map(|x| x.as_str()));
     match post_previews_result {
         Ok(post_previews) => {
             let html = CreatorPageTemplate::from(&post_previews);
