@@ -1,5 +1,5 @@
 use axum::{routing::get, Router};
-use m_rs_lib::cache::file_cache::FileCache;
+use m_rs_lib::cache::json_cache::JsonCache;
 use m_rs_lib::connectors::cached_medium::CachedMediumConnector;
 use m_rs_lib::connectors::graphql_medium::GraphQlMediumConnector;
 use m_rs_lib::routes::asset::get_asset;
@@ -14,11 +14,11 @@ use tower_http::compression::CompressionLayer;
 
 #[tokio::main]
 async fn main() {
-    let post_cache = FileCache::<String> {
+    let post_cache = JsonCache::<String> {
         base_path: PathBuf::from_str("./cache").unwrap(),
         get_file_path: Box::new(|post_id| PathBuf::from_str(&format!("{}.json", post_id)).unwrap()),
     };
-    let post_preview_cache = FileCache::<String> {
+    let post_preview_cache = JsonCache::<String> {
         base_path: PathBuf::from_str("./cache").unwrap(),
         get_file_path: Box::new(|key| PathBuf::from_str(&format!("{}.json", key)).unwrap()),
     };
