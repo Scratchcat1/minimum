@@ -13,8 +13,8 @@ pub struct CachedMediumConnector<
     pub connector: M,
 }
 
-impl<'a, M: MediumConnector, PC: Cache<String, Post>, PPC: Cache<String, CreatorPage>>
-    MediumConnector for CachedMediumConnector<M, PC, PPC>
+impl<M: MediumConnector, PC: Cache<String, Post>, PPC: Cache<String, CreatorPage>> MediumConnector
+    for CachedMediumConnector<M, PC, PPC>
 {
     fn get_post(&self, post_id: &str) -> Result<Post, String> {
         match self.post_cache.get(&post_id.to_string()) {

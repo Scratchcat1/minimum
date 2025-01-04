@@ -10,15 +10,18 @@ use m_rs_lib::routes::user::{get_posts, get_user_redirect};
 use std::path::PathBuf;
 use std::str::FromStr;
 use std::sync::Arc;
+use std::time::Duration;
 use tower_http::compression::CompressionLayer;
 
 #[tokio::main]
 async fn main() {
     let post_cache = JsonCache::<String> {
+        time_to_live: Duration::from_secs(3600),
         base_path: PathBuf::from_str("./cache").unwrap(),
         get_file_path: Box::new(|post_id| PathBuf::from_str(&format!("{}.json", post_id)).unwrap()),
     };
     let post_preview_cache = JsonCache::<String> {
+        time_to_live: Duration::from_secs(3600),
         base_path: PathBuf::from_str("./cache").unwrap(),
         get_file_path: Box::new(|key| PathBuf::from_str(&format!("{}.json", key)).unwrap()),
     };
