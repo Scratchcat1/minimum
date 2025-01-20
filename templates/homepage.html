@@ -1,24 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="/assets/main.css" />
+        <title>Minimum Home</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/assets/main.css" />
-    <title>minimum Home</title>
-</head>
-
-<body>
-    <h1>minimum</h1>
-    Version: {{ version }}
-    <form method="get" action="/user-redirect">
-        <label>
-            Username
-            <input type="text" name="username" />
-        </label>
-        <button type="submit">
-            Go
-        </button>
-    </form>
-</body>
-
+    <body>
+        <h1>Minimum</h1>
+        Version: {{ version }}
+        <form method="get" action="/user-redirect">
+            <label>
+                Username
+                <input type="text" name="username" />
+            </label>
+            <button type="submit">Go</button>
+        </form>
+    </body>
 </html>

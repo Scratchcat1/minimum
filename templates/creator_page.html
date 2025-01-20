@@ -9,9 +9,9 @@
 
 <body>
     <a class="d-flex gap-3 profile-header" href="/user/{{username}}/posts">
+        <h1>{{ name }}</h1>
         <img class="profile-picture" src="https://miro.medium.com/v2/resize:fit:240/{{ image_id}}"
             alt="{{name}} profile picture" />
-        <h1>{{ name }}</h1>
     </a>
     <div class="mt-3">
         {% for post in post_previews.posts %}

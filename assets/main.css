@@ -1,23 +1,23 @@
 :root {
     font-family: "Open Sans", Arial, sans-serif;
-    --color: #444;
+    --color: #222;
     --background-color: #eee;
+    --post-preview-background-hover: #ddd;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --color: #eee;
         --background-color: #444;
+        --post-preview-background-hover: #555;
     }
 
     a {
         color: #1e90ff; /* Light blue */
-        text-decoration: none; /* Remove underline if desired */
     }
 
     a:hover {
         color: #00bfff; /* Lighter blue for hover state */
-        text-decoration: underline; /* Underline on hover */
     }
 }
 
@@ -57,9 +57,13 @@ video {
     gap: 1rem;
     align-items: center;
     color: var(--color);
+    text-decoration: none;
+    justify-content: space-between;
 
     .profile-picture {
-        max-height: 65px;
+        max-height: 6rem;
+        aspect-ratio: 1;
+        object-fit: cover;
     }
 
     h1 {
@@ -107,6 +111,7 @@ video {
 
     &:hover {
         color: var(--color);
+        background: var(--post-preview-background-hover);
     }
 }
 
