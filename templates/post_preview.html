@@ -1,0 +1,26 @@
+<a href="/posts/by-slug/{{unique_slug}}" class="post-preview">
+    <img
+        loading="lazy"
+        src="https://miro.medium.com/v2/resize:fit:240/{{ preview_image.id }}"
+        alt="Preview Image"
+    />
+    <div class="post-preview-info">
+        <strong>{{title}}</strong>
+        <div class="subtitle">{{extended_preview_content.subtitle}}</div>
+        <div class="post-preview-data">
+            <span>
+                <strong>Time</strong>
+                {{self.reading_minutes()}} min
+            </span>
+            <span>
+                <strong>Claps</strong>
+                {{clap_count}}
+            </span>
+            <span>
+                <strong>Created</strong>
+                {% if let Some(date) = self.created_at_date() %} {{date}} {%
+                else %} Unknown {% endif %}
+            </span>
+        </div>
+    </div>
+</a>

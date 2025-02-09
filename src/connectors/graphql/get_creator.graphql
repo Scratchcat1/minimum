@@ -1,0 +1,24 @@
+query CreatorsQuery(
+    $id: ID
+    $username: ID
+) {
+    userResult(id: $id, username: $username) {
+        ... on User {
+            id
+            name
+            username
+            imageId
+            socialStats {
+                followerCount
+            }
+            username
+            hasSubdomain
+            customDomainState {
+                live {
+                    domain
+                }
+            }
+            bio
+        }
+    }
+}

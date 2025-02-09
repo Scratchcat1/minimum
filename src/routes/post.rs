@@ -12,7 +12,7 @@ use std::sync::Arc;
 
 pub fn get_post(post_id: &str, state: Arc<AppState>) -> Response<BoxBody> {
     println!("Request: get_post(post_id={})", post_id);
-    let post_result = state.medium.get_post(&post_id);
+    let post_result = state.crawler.get_post(&post_id).ok_or("");
     match post_result {
         Ok(post) => {
             let html = PostTemplate::from(&post);

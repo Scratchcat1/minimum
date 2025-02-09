@@ -1,6 +1,7 @@
 use reqwest::blocking::{Client, Response};
 use tokio::task::block_in_place;
 
+use crate::types::medium::creator::Creator;
 use crate::types::medium::creator_page::{CreatorPage, UserResult};
 use crate::types::medium::post::Post;
 use crate::types::medium::post::PostResult;
@@ -23,6 +24,9 @@ impl GraphQlMediumConnector {
     }
     fn get_post_previews_graphql() -> String {
         return include_str!("graphql/get_post_previews.graphql").replace("\n", " ");
+    }
+    fn get_creator_graphql() -> String {
+        include_str!("graphql/get_creator.graphql").replace("\n", " ")
     }
 
     fn log_request_outcome(
@@ -91,5 +95,22 @@ impl MediumConnector for GraphQlMediumConnector {
         let mut result: Vec<UserResult<CreatorPage>> = block_in_place(|| res.json().unwrap());
         let post = result.remove(0).data.user_result;
         return Ok(post);
+    }
+
+    fn get_creator(&self, username: &str) -> Result<Creator, String> {
+        let request_start = Instant::now();
+
+        let res = self.graph_ql(format!(
+            "[{{\"operationName\":\"CreatorsQuery\",\"variables\":{{\"username\":\"{}\",\"creator_pagePostsLimit\":25}},\"query\":\"{}\"}}]",
+            username,
+            Self::get_creator_graphql()
+        ));
+
+        let request_description = format!("get_creator {}", username);
+        GraphQlMediumConnector::log_request_outcome(&request_description, &res, &request_start);
+
+        let mut result: Vec<UserResult<Creator>> = block_in_place(|| res.json().unwrap());
+        let post = result.remove(0).data.user_result;
+        Ok(post)
     }
 }

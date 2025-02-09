@@ -1,5 +1,5 @@
-use crate::connectors::medium::MediumConnector;
+use crate::crawler::crawler::Crawler;
 
 pub struct AppState {
-    pub medium: Box<dyn MediumConnector + Sync + Send>,
+    pub crawler: Crawler,
 }

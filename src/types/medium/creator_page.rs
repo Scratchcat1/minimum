@@ -1,3 +1,4 @@
+use askama::Template;
 use axum::http::Uri;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
@@ -31,7 +32,8 @@ pub struct CreatorPagePostsConnection {
     pub paging_info: PagingInfo,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Template)]
+#[template(path = "post_preview.html")]
 pub struct PostPreview {
     pub id: String,
     pub title: String,

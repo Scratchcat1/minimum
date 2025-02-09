@@ -49,9 +49,9 @@ pub struct Paragraph {
 pub struct Metadata {
     pub id: String,
     #[serde(rename = "originalHeight")]
-    pub original_height: u32,
+    pub original_height: Option<u32>,
     #[serde(rename = "originalWidth")]
-    pub original_width: u32,
+    pub original_width: Option<u32>,
     pub alt: Option<String>,
 }
 
