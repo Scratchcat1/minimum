@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use crate::types::medium::{
     creator::{Creator, SocialStats},
-    creator_page::PostPreview,
+    creator_page::{ExtendedPreviewContent, PostPreview, PreviewImage},
     post::Post,
 };
 use http::Uri;
@@ -44,6 +44,11 @@ impl Store for SqliteStore {
                 latest_published_at INTEGER NOT NULL,\
                 updated_at INTEGER NOT NULL,\
                 clap_count INTEGER NOT NULL,\
+                preview_image_id TEXT,\
+                preview_image_alt TEXT,\
+                reading_time INTEGER NOT NULL,\
+                unique_slug NOT NULL,\
+                subtitle TEXT NOT NULL,\
                 license TEXT NOT NULL,\
                 paywall BOOLEAN NOT NULL,\
                 content TEXT NOT NULL\
@@ -89,6 +94,11 @@ impl Store for SqliteStore {
                     latest_published_at,\
                     updated_at,\
                     clap_count,\
+                    preview_image_id,\
+                    preview_image_alt,\
+                    reading_time,\
+                    unique_slug,\
+                    subtitle,\
                     license,\
                     paywall,\
                     content\
@@ -102,6 +112,11 @@ impl Store for SqliteStore {
                     :latest_published_at,\
                     :updated_at,\
                     :clap_count,\
+                    :preview_image_id,\
+                    :preview_image_alt,\
+                    :reading_time,\
+                    :unique_slug,\
+                    :subtitle,\
                     :license,\
                     :paywall,\
                     :content
@@ -116,6 +131,11 @@ impl Store for SqliteStore {
                 ":latest_published_at": &post.latest_published_at,
                 ":updated_at": &post.updated_at,
                 ":clap_count": &post.clap_count,
+                ":preview_image_id": post.preview_image.as_ref().map(|x| x.id.clone()),
+                ":preview_image_alt": post.preview_image.as_ref().map(|x| x.alt.clone()),
+                ":reading_time": &post.reading_time,
+                ":unique_slug": &post.unique_slug,
+                ":subtitle" : &post.preview.subtitle,
                 ":license": &post.license,
                 ":paywall": &post.paywall,
                 ":content": &serialised_content,
@@ -156,7 +176,51 @@ impl Store for SqliteStore {
     }
 
     fn get_post_previews(&self, creator: &str) -> Vec<PostPreview> {
-        todo!()
+        let conn = self.conn.lock().unwrap();
+        let mut stmt = conn
+            .prepare(
+                "SELECT * FROM posts p inner JOIN creators c ON p.creator_id = c.id WHERE c.username = :creator_name",
+            )
+            .unwrap();
+        stmt.query_map(
+            named_params! {
+                ":creator_name": &creator,
+            },
+            |row| {
+                let serialised_url: String = row.get("medium_url").unwrap();
+                let medium_url = Uri::from_str(&serialised_url).unwrap();
+
+                let preview_image_id: Option<String> = row.get("preview_image_id").unwrap();
+                let preview_image_alt: Option<String> = row.get("preview_image_alt").unwrap();
+                let preview_image = match (preview_image_id) {
+                    Some(id) => Some(PreviewImage {
+                        id,
+                        alt: preview_image_alt,
+                    }),
+                    _ => None,
+                };
+
+                Ok(PostPreview {
+                    id: row.get("id").unwrap(),
+                    medium_url: medium_url,
+                    created_at: row.get("created_at").unwrap(),
+                    first_published_at: row.get("first_published_at").unwrap(),
+                    latest_published_at: row.get("latest_published_at").unwrap(),
+                    updated_at: row.get("updated_at").unwrap(),
+                    clap_count: row.get("clap_count").unwrap(),
+                    preview_image: preview_image,
+                    reading_time: row.get("reading_time").unwrap(),
+                    unique_slug: row.get("unique_slug").unwrap(),
+                    extended_preview_content: ExtendedPreviewContent {
+                        subtitle: row.get("subtitle").unwrap(),
+                    },
+                    title: row.get("title").unwrap(),
+                })
+            },
+        )
+        .unwrap()
+        .map(|x| x.unwrap())
+        .collect()
     }
 
     fn get_post(&self, post_id: &str) -> Option<Post> {
@@ -173,6 +237,11 @@ impl Store for SqliteStore {
                     p.latest_published_at as p_latest_published_at,\
                     p.updated_at as p_updated_at,\
                     p.clap_count as p_clap_count,\
+                    p.preview_image_id as p_preview_image_id,\
+                    p.preview_image_alt as p_preview_image_alt,\
+                    p.reading_time as p_reading_time,\
+                    p.unique_slug as p_unique_slug,\
+                    p.subtitle as p_subtitle,\
                     p.license as p_license,\
                     p.paywall as p_paywall,\
                     p.content as p_content,\
@@ -196,6 +265,16 @@ impl Store for SqliteStore {
                 let serialised_url: String = row.get("p_medium_url").unwrap();
                 let medium_url = Uri::from_str(&serialised_url).unwrap();
 
+                let preview_image_id: Option<String> = row.get("p_preview_image_id").unwrap();
+                let preview_image_alt: Option<String> = row.get("p_preview_image_alt").unwrap();
+                let preview_image = match (preview_image_id) {
+                    Some(id) => Some(PreviewImage {
+                        id,
+                        alt: preview_image_alt,
+                    }),
+                    _ => None,
+                };
+
                 Ok(Post {
                     id: row.get("p_id").unwrap(),
                     creator: Creator::from_prefix("c_", row),
@@ -206,6 +285,12 @@ impl Store for SqliteStore {
                     latest_published_at: row.get("p_latest_published_at").unwrap(),
                     updated_at: row.get("p_updated_at").unwrap(),
                     clap_count: row.get("p_clap_count").unwrap(),
+                    preview_image: preview_image,
+                    reading_time: row.get("p_reading_time").unwrap(),
+                    unique_slug: row.get("p_unique_slug").unwrap(),
+                    preview: ExtendedPreviewContent {
+                        subtitle: row.get("p_subtitle").unwrap(),
+                    },
                     title: row.get("p_title").unwrap(),
                     license: row.get("p_license").unwrap(),
                     content: content,

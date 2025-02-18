@@ -50,7 +50,7 @@ pub struct PostPreview {
     #[serde(rename = "clapCount")]
     pub clap_count: u64,
     #[serde(rename = "previewImage")]
-    pub preview_image: PreviewImage,
+    pub preview_image: Option<PreviewImage>,
     #[serde(rename = "readingTime")]
     pub reading_time: f32,
     #[serde(rename = "uniqueSlug")]
@@ -72,6 +72,7 @@ impl PostPreview {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct PreviewImage {
     pub id: String,
+    pub alt: Option<String>,
 }
 
 #[derive(Deserialize, Serialize, Debug)]

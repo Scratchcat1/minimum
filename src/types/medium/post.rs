@@ -2,6 +2,8 @@ use crate::types::medium::creator;
 use http::Uri;
 use serde::{Deserialize, Serialize};
 
+use super::creator_page::{ExtendedPreviewContent, PreviewImage};
+
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Post {
     pub id: String,
@@ -20,6 +22,14 @@ pub struct Post {
     pub updated_at: u64,
     #[serde(rename = "clapCount")]
     pub clap_count: u64,
+    #[serde(rename = "previewImage")]
+    pub preview_image: Option<PreviewImage>,
+    #[serde(rename = "readingTime")]
+    pub reading_time: f32,
+    #[serde(rename = "uniqueSlug")]
+    pub unique_slug: String,
+    #[serde(rename = "extendedPreviewContent")]
+    pub preview: ExtendedPreviewContent,
     pub title: String,
     pub license: String,
     pub content: Content,

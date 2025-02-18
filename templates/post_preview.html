@@ -1,9 +1,11 @@
 <a href="/posts/by-slug/{{unique_slug}}" class="post-preview">
+    {% if let Some(preview_img) = preview_image %}
     <img
         loading="lazy"
-        src="https://miro.medium.com/v2/resize:fit:240/{{ preview_image.id }}"
+        src="https://miro.medium.com/v2/resize:fit:240/{{ preview_img.id }}"
         alt="Preview Image"
     />
+    {% endif %}
     <div class="post-preview-info">
         <strong>{{title}}</strong>
         <div class="subtitle">{{extended_preview_content.subtitle}}</div>

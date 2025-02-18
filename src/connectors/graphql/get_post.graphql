@@ -93,7 +93,7 @@ query PostPageQuery($postId: ID!, $postMeteringOptions: PostMeteringOptions) {
             title
             uniqueSlug
             readingTime
-            previewContent {
+            extendedPreviewContent {
                 subtitle
             }
             previewImage {
