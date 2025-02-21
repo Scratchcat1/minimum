@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use crate::types::medium::creator;
 use http::Uri;
 use serde::{Deserialize, Serialize};
@@ -68,6 +70,35 @@ pub struct Metadata {
 impl Metadata {
     pub fn is_video(&self) -> bool {
         return self.id.ends_with(".gif");
+    }
+
+    pub fn best_url(&self) -> String {
+        match self.is_video() {
+            true => {
+                format!("https://miro.medium.com/v2/format:mp4/{}", self.id)
+            }
+            false => {
+                format!("https://miro.medium.com/v2/format:jpeg/{}", self.id)
+            }
+        }
+    }
+
+    pub fn local_filename(&self) -> String {
+        let filename = Path::new(&self.id);
+        match self.is_video() {
+            true => filename
+                .with_extension("mp4")
+                .file_name()
+                .unwrap()
+                .to_string_lossy()
+                .to_string(),
+            false => filename
+                .with_extension("jpg")
+                .file_name()
+                .unwrap()
+                .to_string_lossy()
+                .to_string(),
+        }
     }
 }
 

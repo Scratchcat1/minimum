@@ -40,10 +40,10 @@
         {% if let Some(metadata) = paragraph.metadata %}
         <figure>
             {% if metadata.is_video() %}
-            <video controls src="https://miro.medium.com/v2/format:mp4/{{ metadata.id }}"></video>
+            {% let img_id = metadata.id.replace(".gif", "") + ".mp4" %}
+            <video controls src="/post_media/{{id}}/{{ metadata.local_filename() }}"></video>
             {% else %}
-            <img loading="lazy" src="https://miro.medium.com/v2/format:jpeg/{{ metadata.id }}"
-                alt="{{paragraph.text}}" />
+            <img loading="lazy" src="/post_media/{{id}}/{{ metadata.local_filename() }}" alt="{{paragraph.text}}" />
             {% endif %}
             <figcaption>{{paragraph.text}}</figcaption>
         </figure>

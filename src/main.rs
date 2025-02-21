@@ -17,7 +17,7 @@ use std::path::PathBuf;
 use std::str::FromStr;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
-use tower_http::compression::CompressionLayer;
+use tower_http::{compression::CompressionLayer, services::ServeDir};
 
 #[tokio::main]
 async fn main() {
@@ -59,6 +59,7 @@ async fn main() {
         .route("/posts/by-id/:post_id", get(get_post_endpoint))
         .route("/posts/by-slug/:unique_slug", get(get_unique_slug_post))
         .route("/assets/:asset_name", get(get_asset))
+        .nest_service("/post_media", ServeDir::new("./media"))
         .layer(CompressionLayer::new())
         .with_state(Arc::new(AppState { crawler }));
 
