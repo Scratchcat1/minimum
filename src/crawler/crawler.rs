@@ -34,7 +34,7 @@ impl Crawler {
             if let Some(next) = &current_post.post_previews.paging_info.next {
                 current_post = self
                     .medium
-                    .get_post_previews(&username, Some(&next.from.to_string()))
+                    .get_post_previews(&username, Some(&next.from))
                     .unwrap();
             } else {
                 break;
@@ -44,18 +44,14 @@ impl Crawler {
 
     fn crawl_post_media(&self, post: &Post) {
         println!("Downloading media for post {}", post.id);
-        match &post.preview_image {
-            Some(img) => self.save_post_image(&post.id, &img.id),
-            _ => {}
-        };
+        if let Some(img) = &post.preview_image {
+            self.save_post_image(&post.id, &img.id);
+        }
         for paragraph in &post.content.body_model.paragraphs {
-            match &paragraph.metadata {
-                Some(metadata) => {
-                    if !metadata.id.is_empty() {
-                        self.save_post_image(&post.id, &metadata.id);
-                    }
+            if let Some(metadata) = &paragraph.metadata {
+                if !metadata.id.is_empty() {
+                    self.save_post_image(&post.id, &metadata.id);
                 }
-                _ => {}
             }
         }
     }
